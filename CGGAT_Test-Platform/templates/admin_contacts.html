@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block title %}Admin Contacts - CGAAT{% endblock %}
+{% block content %}
+<section class="section"><div class="container table-wrap card"><h1>Contact Messages</h1><table><thead><tr><th>Name</th><th>Email</th><th>Subject</th><th>Message</th><th>Date</th></tr></thead><tbody>{% for row in rows %}<tr><td>{{ row.name }}</td><td>{{ row.email }}</td><td>{{ row.subject }}</td><td>{{ row.message }}</td><td>{{ row.created_at[:10] }}</td></tr>{% else %}<tr><td colspan="5">No messages found.</td></tr>{% endfor %}</tbody></table></div></section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Login - CGAAT{% endblock %}
+{% block content %}
+<section class="section auth-section">
+  <div class="container narrow">
+    <div class="card form-card auth-card premium-hover auth-shell">
+      <p class="eyebrow">Welcome back</p>
+      <h1>Log In</h1>
+      <p>Access the user panel or admin panel with your account.</p>
+      <form method="post" class="form-grid single">
+        <div><label>Email</label><input type="email" name="email" required></div>
+        <div><label>Password</label><input type="password" name="password" required></div>
+        <button class="btn btn-primary" type="submit">Log In</button>
+      </form>
+      <div class="hint-box">
+        <strong>Admin Demo Login</strong>
+        <p>Email: admin@cgaat.in<br>Password: admin123</p>
+      </div>
+      <p class="muted-line auth-foot-note">Don't have an account yet? <a href="{{ url_for('register') }}">Sign up now</a></p>
+    </div>
+  </div>
+</section>
+{% endblock %}

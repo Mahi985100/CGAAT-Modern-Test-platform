@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Admin Users - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">Admin Panel</p>
+    <h1>Registered Users</h1>
+    <p>View all users and roles from the admin side.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container table-wrap card premium-hover table-card">
+    <table>
+      <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Created</th></tr></thead>
+      <tbody>
+        {% for u in users %}
+        <tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.role }}</td><td>{{ u.created_at[:10] }}</td></tr>
+        {% else %}
+        <tr><td colspan="4">No users found.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

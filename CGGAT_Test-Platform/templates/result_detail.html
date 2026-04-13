@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Result Detail - CGAAT{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <div class="card result-card report-card premium-hover">
+      <div class="report-header">
+        <div>
+          <span class="pill">{{ row.test_name }}</span>
+          <h1>{{ row.category }}</h1>
+          <p class="muted-line">A complete result summary has been generated for this attempt.</p>
+        </div>
+        <div class="score-box">Score: {{ row.score }}</div>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-block">
+          <h3>Package</h3>
+          <p>{{ row.package_name }}</p>
+        </div>
+        <div class="report-block">
+          <h3>Date</h3>
+          <p>{{ row.created_at }}</p>
+        </div>
+        <div class="report-block full">
+          <h3>Strengths</h3>
+          <p>{{ row.strengths }}</p>
+        </div>
+        <div class="report-block full">
+          <h3>Recommendation</h3>
+          <p>{{ row.recommendation }}</p>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('download_result_pdf', attempt_id=row.id) }}">Download PDF Report</a>
+        <a class="btn btn-light" href="{{ url_for('results') }}">Back to Results</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

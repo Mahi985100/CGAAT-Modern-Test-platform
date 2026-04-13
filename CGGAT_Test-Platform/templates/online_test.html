@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}{{ test.name }} - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">{{ test.package }}</p>
+    <h1>{{ test.name }}</h1>
+    <p>{{ test.desc }}</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container narrow">
+    <div class="card exam-summary-bar">
+      <div class="exam-summary-item"><strong>{{ test.tag }}</strong><span>Exam Theme</span></div>
+      <div class="exam-summary-item"><strong>{{ test.questions|length }}</strong><span>Total Questions</span></div>
+      <div class="exam-summary-item"><strong>Likert</strong><span>Answer Style</span></div>
+    </div>
+    <form method="post" class="card form-card premium-form-card exam-form-shell">
+      <div class="form-grid single">
+        {% for q in test.questions %}
+        <div class="question-card premium-hover">
+          <label>{{ loop.index }}. {{ q.text }}</label>
+          <select name="q{{ loop.index }}" required>
+            <option value="">Choose an option</option>
+            <option value="1">Strongly Disagree</option>
+            <option value="2">Disagree</option>
+            <option value="3">Neutral</option>
+            <option value="4">Agree</option>
+            <option value="5">Strongly Agree</option>
+          </select>
+        </div>
+        {% endfor %}
+      </div>
+      <button class="btn btn-primary" type="submit">Submit Test &amp; Generate Report</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

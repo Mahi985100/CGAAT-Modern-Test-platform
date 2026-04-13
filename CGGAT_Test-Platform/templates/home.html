@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+{% block title %}Home - CGAAT{% endblock %}
+{% block content %}
+<section class="hero hero-home">
+  <div class="container hero-grid">
+    <div>
+      <p class="eyebrow">Modern aptitude platform for students</p>
+      <h1>Interesting online exams with a polished user and admin experience</h1>
+      <p class="hero-text">CGAAT now feels more modern, aesthetic, and engaging with hover effects, clearer exam cards, smart dashboards, and three different exam experiences.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('tests') }}">Explore Exams</a>
+        <a class="btn btn-light" href="{{ url_for('register') }}">Create Account</a>
+      </div>
+      <div class="hero-points">
+        <span>Pattern-based questions</span>
+        <span>IT-focused questions</span>
+        <span>PDF result reports</span>
+      </div>
+      <div class="stats-row hero-mini-stats">
+        <div class="stat glow-stat"><strong>3</strong><span>Different exam types</span></div>
+        <div class="stat glow-stat"><strong>User</strong><span>Student dashboard</span></div>
+        <div class="stat glow-stat"><strong>Admin</strong><span>Control panel</span></div>
+      </div>
+    </div>
+    <div class="hero-card hero-glow showcase-panel">
+      <div class="hero-stack">
+        <div class="floating-card accent-card">
+          <span class="mini-badge white-badge">NEW LOOK</span>
+          <strong>Pattern Hunter Exam</strong>
+          <p>Odd-one-out, sequence logic, and puzzle-style thinking made more engaging.</p>
+        </div>
+        <div class="floating-card interactive-card premium-hover">
+          <span class="mini-badge">TRENDING</span>
+          <strong>Tech Mindset Exam</strong>
+          <p>Questions inspired by IT awareness, troubleshooting, digital thinking, and precision.</p>
+        </div>
+        <div class="floating-card soft-blue interactive-card premium-hover">
+          <span class="mini-badge">PREMIUM</span>
+          <strong>Future Ready Exam</strong>
+          <p>Career-fit questions for modern students who want skills, clarity, and direction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Exam collection</p>
+        <h2>Three exam types with different question themes</h2>
+        <p>Each exam now has its own identity, topic focus, and more interesting question style so your GitHub project looks stronger and more realistic.</p>
+      </div>
+      <a class="btn btn-light" href="{{ url_for('tests') }}">See Full Exam Page</a>
+    </div>
+    <div class="card-grid three">
+      {% for test in tests %}
+      <div class="card test-card premium-hover fancy-border">
+        <div class="card-top-row">
+          <span class="pill">{{ test.tag }}</span>
+          <span class="mini-badge">{{ test.package }}</span>
+        </div>
+        <h3>{{ test.name }}</h3>
+        <p>{{ test.desc }}</p>
+        <ul class="feature-list">
+          {% if loop.index == 1 %}
+          <li>Pattern, sequence, and puzzle-based prompts</li>
+          <li>Strong visual-reasoning style feel</li>
+          <li>Best for logical thinkers</li>
+          {% elif loop.index == 2 %}
+          <li>IT-inspired and troubleshooting-based prompts</li>
+          <li>Focus on digital habits and technical clarity</li>
+          <li>Best for tech-curious students</li>
+          {% else %}
+          <li>Career and future-planning prompts</li>
+          <li>Strengths, direction, and long-term mindset</li>
+          <li>Best for decision-making students</li>
+          {% endif %}
+        </ul>
+        <div class="price-row">
+          <strong>₹{{ test.price }}</strong>
+          <small>One time access</small>
+        </div>
+        <a class="text-link" href="{{ url_for('tests') }}">Explore package →</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section-soft">
+  <div class="container two-col split-gap">
+    <div>
+      <p class="eyebrow">Why this version feels stronger</p>
+      <h2>Designed to look polished on GitHub and interesting during demo</h2>
+      <div class="card-grid two compact">
+        <div class="card premium-hover icon-card">
+          <div class="step-no">UI</div>
+          <h3>Modern visual style</h3>
+          <p>Soft gradients, card depth, hover motion, glass header, and cleaner layouts give the project a more premium feel.</p>
+        </div>
+        <div class="card premium-hover icon-card">
+          <div class="step-no">UX</div>
+          <h3>Clear exam flow</h3>
+          <p>Users can understand the exam type faster, move into the test smoothly, and read results in a cleaner format.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card premium-hover admin-user-panel">
+      <div class="card-top-row">
+        <span class="pill">Two Panels</span>
+        <span class="mini-badge">Live Routes</span>
+      </div>
+      <h3>User + Admin panels included</h3>
+      <p>This project already supports both sides, and now both pages are styled more clearly for presentation and portfolio value.</p>
+      <div class="panel-list">
+        <div class="panel-item"><strong>User Panel</strong><span>Packages, attempts, results, report download</span></div>
+        <div class="panel-item"><strong>Admin Panel</strong><span>Users, attempts, contacts, dashboard stats</span></div>
+        <div class="panel-item"><strong>Exam Engine</strong><span>Three different tests with different question themes</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">How it works</p>
+      <h2>Simple flow from account to report</h2>
+    </div>
+    <div class="card-grid four">
+      <div class="card icon-card premium-hover"><div class="step-no">1</div><h3>Register</h3><p>Create a user account and access the student dashboard.</p></div>
+      <div class="card icon-card premium-hover"><div class="step-no">2</div><h3>Choose Exam</h3><p>Select Pattern Hunter, Tech Mindset, or Future Ready exam.</p></div>
+      <div class="card icon-card premium-hover"><div class="step-no">3</div><h3>Submit Answers</h3><p>Complete the exam and generate the result automatically.</p></div>
+      <div class="card icon-card premium-hover"><div class="step-no">4</div><h3>View Report</h3><p>Open the result screen and download the PDF version.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

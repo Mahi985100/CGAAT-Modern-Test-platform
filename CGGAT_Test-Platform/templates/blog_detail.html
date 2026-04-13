@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }} - CGAAT{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container narrow">
+    <article class="card article-card">
+      <span class="pill">{{ post.category }}</span>
+      <h1>{{ post.title }}</h1>
+      <small>{{ post.date }}</small>
+      <p>{{ post.content }}</p>
+      <a class="text-link" href="{{ url_for('blog') }}">← Back to blog</a>
+    </article>
+  </div>
+</section>
+{% endblock %}

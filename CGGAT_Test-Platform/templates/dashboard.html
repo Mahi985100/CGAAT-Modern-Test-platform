@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">User Panel</p>
+    <h1>Welcome, {{ user.name }}</h1>
+    <p>Track your packages, exam activity, and recent progress from one modern dashboard.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container card-grid three">
+    <div class="card stat-card premium-hover"><strong>{{ total_tests }}</strong><span>Total Tests Attempted</span></div>
+    <div class="card stat-card premium-hover"><strong>{{ active_packages }}</strong><span>Active Packages</span></div>
+    <div class="card stat-card premium-hover"><strong>{{ highest_score }}</strong><span>Highest Score</span></div>
+  </div>
+</section>
+<section class="section section-soft">
+  <div class="container two-col split-gap">
+    <div class="card premium-hover dashboard-panel">
+      <div class="card-top-row">
+        <h3>Active Packages</h3>
+        <span class="mini-badge">Student Access</span>
+      </div>
+      <div class="stack-list">
+        {% for s in subscriptions %}
+        <div class="stack-item"><strong>{{ s.package_name }}</strong><span>{{ s.test_slug }}</span></div>
+        {% else %}
+        <p>No packages activated yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="card premium-hover dashboard-panel">
+      <div class="card-top-row">
+        <h3>Recent Attempts</h3>
+        <a class="text-link" href="{{ url_for('results') }}">View all</a>
+      </div>
+      <div class="stack-list">
+        {% for a in attempts %}
+        <div class="stack-item"><strong>{{ a.test_name }}</strong><span>{{ a.category }} · {{ a.score }}</span></div>
+        {% else %}
+        <p>No attempts yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

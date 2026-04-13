@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}Admin Panel - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">Admin Panel</p>
+    <h1>Overview Dashboard</h1>
+    <p>Monitor users, attempts, contacts, and package activity from one polished admin screen.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container card-grid four">
+    <div class="card stat-card premium-hover"><strong>{{ stats.users }}</strong><span>Users</span></div>
+    <div class="card stat-card premium-hover"><strong>{{ stats.attempts }}</strong><span>Attempts</span></div>
+    <div class="card stat-card premium-hover"><strong>{{ stats.contacts }}</strong><span>Contact Queries</span></div>
+    <div class="card stat-card premium-hover"><strong>{{ stats.subscriptions }}</strong><span>Packages</span></div>
+  </div>
+</section>
+<section class="section section-soft">
+  <div class="container admin-links admin-toolbar">
+    <a class="btn btn-light" href="{{ url_for('admin_users') }}">Manage Users</a>
+    <a class="btn btn-light" href="{{ url_for('admin_attempts') }}">View Attempts</a>
+    <a class="btn btn-light" href="{{ url_for('admin_contacts') }}">Contact Messages</a>
+  </div>
+  <div class="container table-wrap card premium-hover table-card">
+    <div class="card-top-row section-table-head">
+      <h3>Recent Test Activity</h3>
+      <span class="mini-badge">Latest records</span>
+    </div>
+    <table>
+      <thead><tr><th>User</th><th>Test</th><th>Score</th><th>Category</th><th>Date</th></tr></thead>
+      <tbody>
+        {% for row in recent_attempts %}
+        <tr><td>{{ row.user_name }}</td><td>{{ row.test_name }}</td><td>{{ row.score }}</td><td>{{ row.category }}</td><td>{{ row.created_at[:10] }}</td></tr>
+        {% else %}
+        <tr><td colspan="5">No attempts yet.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}

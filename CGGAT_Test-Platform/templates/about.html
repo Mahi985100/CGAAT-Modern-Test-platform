@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}About - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">About Us</p>
+    <h1>Created by experts, crafted for clarity</h1>
+    <p>CGAAT helps students discover strengths, personality, and better career direction through structured assessments.</p>
+  </div>
+</section>
+<section class="section">
+  <div class="container two-col split-gap">
+    <div class="card premium-hover">
+      <h3>Our Mission</h3>
+      <p>To make career and psychometric testing clear, modern, and accessible for students, parents, and institutions.</p>
+    </div>
+    <div class="card premium-hover">
+      <h3>What We Offer</h3>
+      <p>Online tests, personalized reports, a clean student dashboard, and simple admin management for results and contacts.</p>
+    </div>
+  </div>
+</section>
+<section class="section section-soft">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Hear from Real Students</p>
+      <h2>Explore success stories and testimonials from those who've unlocked their careers with our online psychometric tests.</h2>
+    </div>
+    <div class="card-grid three">
+      {% for title, quote, author, city in testimonials %}
+      <div class="card testimonial premium-hover">
+        <span class="pill">{{ title }}</span>
+        <p>“{{ quote }}”</p>
+        <strong>{{ author }}</strong>
+        <small>{{ city }}</small>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

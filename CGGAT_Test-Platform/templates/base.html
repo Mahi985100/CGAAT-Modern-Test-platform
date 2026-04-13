@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CGAAT{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="contact-mini">(+91) 9558809816 &nbsp; | &nbsp; info@cgaat.in</div>
+      <div class="auth-mini">
+        {% if current_user %}
+          <span>Hello, {{ current_user['name'] }}</span>
+          {% if current_user['role'] == 'admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+          {% else %}
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+          {% endif %}
+          <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+          <a href="{{ url_for('login') }}">Log in</a>
+          <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="container nav-wrap">
+      <a href="{{ url_for('home') }}" class="brand">CGAAT</a>
+      <nav class="nav">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('tests') }}">Online Test</a>
+        <a href="{{ url_for('blog') }}">Blog</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+      </nav>
+      <div class="nav-actions">
+        {% if current_user %}
+          {% if current_user['role'] == 'admin' %}
+            <a class="btn btn-light" href="{{ url_for('admin_dashboard') }}">Admin Panel</a>
+          {% else %}
+            <a class="btn btn-light" href="{{ url_for('dashboard') }}">Dashboard</a>
+          {% endif %}
+        {% else %}
+          <a class="btn btn-light" href="{{ url_for('login') }}">Log In</a>
+          <a class="btn btn-primary" href="{{ url_for('register') }}">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="container flashes">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>About</h3>
+        <a href="{{ url_for('about') }}">About Us</a>
+        <a href="{{ url_for('tests') }}">Online Test</a>
+        <a href="{{ url_for('home') }}#partner">Become Partner</a>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('blog') }}">News &amp; Blogs</a>
+        <a href="{{ url_for('home') }}#newsletter">Newsletter</a>
+        <a href="{{ url_for('tests') }}">Career</a>
+      </div>
+      <div>
+        <h3>Support</h3>
+        <a href="{{ url_for('faq') }}">FAQs</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+        <a href="{{ url_for('sitemap') }}">Sitemap</a>
+        <a href="{{ url_for('terms') }}">Downloads</a>
+      </div>
+      <div id="newsletter">
+        <h3>Subscribe Our Newsletter</h3>
+        <p>Create an account to receive our newsletter, test recommendations and promotions.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email">
+          <button type="button" class="btn btn-primary">Subscribe</button>
+        </form>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>© {{ year }} CGAAT Made with care.</div>
+      <div class="footer-links">
+        <a href="{{ url_for('terms') }}">Terms of Use</a>
+        <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        <a href="{{ url_for('disclaimer') }}">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Online Tests - CGAAT{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <p class="eyebrow">Exam gallery</p>
+    <h1>Choose your exam experience</h1>
+    <p>All three exams now have different themes so the project feels more original and interesting.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card-grid three">
+    {% for test in tests %}
+    <div class="card test-card premium-hover exam-card-large">
+      <div class="card-top-row">
+        <span class="pill">{{ test.tag }}</span>
+        <span class="mini-badge">{{ test.package }}</span>
+      </div>
+      <h3>{{ test.name }}</h3>
+      <p>{{ test.desc }}</p>
+      <div class="exam-meta-grid">
+        <div class="exam-meta-box"><strong>{{ test.questions|length }}</strong><span>Questions</span></div>
+        <div class="exam-meta-box"><strong>₹{{ test.price }}</strong><span>Access Fee</span></div>
+      </div>
+      <ul class="feature-list">
+        {% if test.slug == 'aptitude-pro' %}
+        <li>Odd one out and sequence style prompts</li>
+        <li>Focus on observation and logic flow</li>
+        <li>Great for pattern-finding practice</li>
+        {% elif test.slug == 'personality-plus' %}
+        <li>IT awareness and digital reasoning theme</li>
+        <li>Problem solving and troubleshooting mindset</li>
+        <li>Great for students interested in technology</li>
+        {% else %}
+        <li>Career fit and future decision making theme</li>
+        <li>Explores goals, strengths, and direction</li>
+        <li>Great for stream and career clarity</li>
+        {% endif %}
+      </ul>
+      {% if current_user %}
+      <form method="post" action="{{ url_for('buy_package', slug=test.slug) }}">
+        <button class="btn btn-primary full-btn" type="submit">Activate &amp; Start</button>
+      </form>
+      {% else %}
+      <a class="btn btn-primary full-btn" href="{{ url_for('login') }}">Login to Start</a>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
